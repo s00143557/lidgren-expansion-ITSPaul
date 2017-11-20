@@ -39,6 +39,23 @@ namespace GameData
 
     }
 
+    public class CollectableData
+    {
+        //Just gonna throw some fields in here, see what makes sense to me after the fact. Oh wait nvm I had most of them the same as shown on the board.
+        public string collectableID;
+        public string AssetName;
+        public int value;
+        public float X;
+        public float Y;
+
+        public CollectableData() { }
+
+        //public CollectableData()
+        //{
+
+        //}
+    }
+
     public class MovedData
     {
         public string playerID;

@@ -11,10 +11,19 @@ namespace LidgrenServer
 {
     public class Server
     {
+        public static string[] collectableNames = new string[] { "coinRed", "coinOrange", "coinDarkRed", "coinIndigo", "coinTurquoise", "coinGreen", "coinPurple" };
+        public static List<CollectableData> collectables = new List<CollectableData>()
+        {
+            new CollectableData { AssetName = collectableNames[new Random().Next(collectableNames.Count() -1)], value = new Random().Next(10,20), X = new Random().Next(0, 200), Y = new Random().Next(0, 200)},
+            new CollectableData { AssetName = collectableNames[new Random().Next(collectableNames.Count() -1)], value = new Random().Next(10,20), X = new Random().Next(0, 200), Y = new Random().Next(0, 200)},
+            new CollectableData { AssetName = collectableNames[new Random().Next(collectableNames.Count() -1)], value = new Random().Next(10,20), X = new Random().Next(0, 200), Y = new Random().Next(0, 200)},
+            new CollectableData { AssetName = collectableNames[new Random().Next(collectableNames.Count() -1)], value = new Random().Next(10,20), X = new Random().Next(0, 200), Y = new Random().Next(0, 200)},
+            new CollectableData { AssetName = collectableNames[new Random().Next(collectableNames.Count() -1)], value = new Random().Next(10,20), X = new Random().Next(0, 200), Y = new Random().Next(0, 200)}
+        };
         public static List<PlayerData> Players = new List<PlayerData>();
         public static List<PlayerData> RegisteredPlayers = new List<PlayerData>();
         public static GetWorldSize world = new GetWorldSize { X = 800, y = 600 };
-        public static NetPeerConfiguration config = new NetPeerConfiguration("ppMyGame")
+        public static NetPeerConfiguration config = new NetPeerConfiguration("s00143557GameThing")
         {
             Port = 5001
         };
@@ -82,6 +91,15 @@ namespace LidgrenServer
             DataHandler.sendNetMess<Joined>(Server.server,
                        new Joined { playerId = playerID, gameTag = "Player " + playerID }, SENT.TOALL);
             // Tell all the clients that the there is a new player and all the players so far
+
+            //Send Collectables
+            foreach (CollectableData collectable in collectables)
+            {
+                DataHandler.sendNetMess<CollectableData>(Server.server,
+                    collectables[0], SENT.TOALL);
+            }
+
+
             foreach (PlayerData player in Players)
             {
                 DataHandler.sendNetMess<Joined>(Server.server,
