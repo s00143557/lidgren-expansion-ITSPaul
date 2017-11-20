@@ -32,7 +32,7 @@ namespace LidgrenClient.Game_Components
                 BoundingRect.Center.ToVector2() - font.MeasureString(collectableData.value.ToString()) / 2,
                 Color.White);
             sp.End();
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
     }
 }
